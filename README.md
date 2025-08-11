@@ -18,4 +18,27 @@ it runs in a lightweight Docker container and is automatically cleaned up after 
 - Docker installed and running
 
 ## Installation
-Clone the repository and read 01_infos.txt
+
+```
+git clone https://github.com/<name>/testcontainer.git
+cd testcontainer
+uv sync
+uv run python - <<EOF
+from testcontainers.redis import RedisContainer
+import redis
+
+def test_redis_container():
+  with RedisContainer() as redis_container:
+    redis_client = redis_container.get_client(decode_responses=True)
+    redis_client.set("Greeting", "Hello world")
+    value = redis_client.get("Greeting")
+    print(f"Value of Greeting is {value}")
+    assert value == "Hello world"
+
+if __name__ == "__main__":
+  print(">>> start redis test synchronously")
+  test_redis_container()
+
+print(f">>> done");
+EOF
+```
