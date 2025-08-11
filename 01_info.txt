@@ -24,6 +24,9 @@ EOF
 
 git add .
 git commit -m "Initial commit"
+git branch -M main
 git remote add origin https://github.com/<name>/testcontainer.git
 git push -u origin main
+  username
+  access-token from Settings / Developer Settings / Tokens / Generate new Token / Generate new Token (classic) / repo_public / generate token / COPY 
 
