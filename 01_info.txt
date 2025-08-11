@@ -1,0 +1,25 @@
+
+uv init testcontainers2
+cd testcontainers2
+uv add redis testcontainers[redis]
+
+uv run python - <<EOF
+from testcontainers.redis import RedisContainer
+import redis
+
+def test_redis_container():
+  with RedisContainer() as redis_container:
+    redis_client = redis_container.get_client(decode_responses=True)
+    redis_client.set("Greeting", "Hello world")
+    value = redis_client.get("Greeting")
+    print(f"Value of Greeting is {value}")
+    assert value == "Hello world"
+
+if __name__ == "__main__":
+  print(">>> start redis test synchronously")
+  test_redis_container()
+
+print(f">>> done");
+EOF
+
+git add .
