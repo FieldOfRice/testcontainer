@@ -22,6 +22,8 @@ if __name__ == "__main__":
 print(f">>> done");
 EOF
 
+# the following commands would push this up to github
+
 git add .
 git commit -m "Initial commit"
 git branch -M main
